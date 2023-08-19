@@ -3,7 +3,7 @@ controlPlane:
   image:
     repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-control-plane
     pullPolicy: IfNotPresent
-    tag: "0.0.2-alpha"
+    tag: "0.0.3"
 
   imagePullSecrets: []
   nameOverride: ""
@@ -47,7 +47,7 @@ client:
   image:
     repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-client
     pullPolicy: IfNotPresent
-    tag: "0.0.2-alpha"
+    tag: "0.0.3"
 
   imagePullSecrets: []
   nameOverride: ""
@@ -66,7 +66,7 @@ deployer:
   image:
     repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-deployer
     pullPolicy: IfNotPresent
-    tag: "0.0.2-alpha"
+    tag: "0.0.3"
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
@@ -107,7 +107,7 @@ apiGateway:
   image:
     repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-api-gateway
     pullPolicy: IfNotPresent
-    tag: "0.0.2-alpha"
+    tag: "0.0.3"
 
   imagePullSecrets: []
   nameOverride: ""
@@ -138,7 +138,7 @@ apiGateway:
     config: {}
 
 runtime:
-  repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-runtime:0.0.2-alpha
+  repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-runtime:0.0.3
   imagePullPolicy: IfNotPresent
 
 tenants:
