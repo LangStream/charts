@@ -1,2 +1,4 @@
-# charts
-LangStream Helm charts catalog.
+# LangStream Helm Charts Repository
+
+Charts:
+- [LangStream](./charts/langstream/)
