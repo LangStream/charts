@@ -25,7 +25,7 @@ jobs:
         uses: helm/chart-testing-action@v1.0.0
         with:
           command: lint
-          config: ct-master.yaml
+          config: ct-main.yaml
 
       - name: actions-k3s
         uses: debianmaster/actions-k3s@v1.0.1
