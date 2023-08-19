@@ -1,0 +1,59 @@
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Fetch history
+        run: git fetch --prune --unshallow
+
+      - name: Create Kubeconfig directories
+        run: |
+          mkdir ~/.kube
+          touch ~/.kube/config
+
+      - name: Run chart-testing (lint)
+        id: lint
+        uses: helm/chart-testing-action@v1.0.0
+        with:
+          command: lint
+          config: ct-master.yaml
+
+      - name: actions-k3s
+        uses: debianmaster/actions-k3s@v1.0.1
+        id: k3s
+        with:
+          version: v1.18.2-k3s1
+
+      - name: Run chart-testing (install)
+        uses: helm/chart-testing-action@v1.0.0
+        with:
+          command: install
+          config: ct-main.yaml
+          kubeconfig: ${{ steps.k3s.outputs.kubeconfig }}
+  
+  release:
+    needs: lint-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.5.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "true"

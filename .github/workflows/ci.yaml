@@ -1,0 +1,34 @@
+name: Charts CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Fetch history
+        run: git fetch --prune --unshallow
+      
+      - name: Create Kubeconfig directories
+        run: |
+          mkdir ~/.kube
+          touch ~/.kube/config
+
+      - name: Run chart-testing (lint)
+        id: lint
+        uses: helm/chart-testing-action@v1.0.0
+        with:
+          command: lint
+          config: ct-main.yaml
+
+      - name: actions-k3s
+        uses: debianmaster/actions-k3s@v1.0.1
+        id: k3s
+        with:
+          version: v1.18.2-k3s1
