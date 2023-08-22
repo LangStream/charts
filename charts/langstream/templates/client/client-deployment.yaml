@@ -28,7 +28,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.client.securityContext | nindent 12 }}
-          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag | default .Values.images.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.client.image.pullPolicy }}
           resources:
             {{- toYaml .Values.client.resources | nindent 12 }}

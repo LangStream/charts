@@ -11,7 +11,7 @@ data:
   DEPLOYER_CLUSTER_RUNTIME: |
     kubernetes:
      namespace-prefix: {{ .Values.tenants.namespacePrefix }}
-     image: {{ .Values.runtime.image }}
+     image: "{{ include "langstream.runtimeImage" . }}"
      image-pull-policy: {{ .Values.runtime.imagePullPolicy }}
 {{- if .Values.deployer.app.config.clusterRuntime.kubernetes }}
 {{- range $key, $val := $.Values.deployer.app.config.clusterRuntime.kubernetes }}

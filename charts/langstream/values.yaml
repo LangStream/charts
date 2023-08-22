@@ -1,9 +1,15 @@
+
+# Global settings applied to all the images
+images:
+  tag: 0.0.4
+
+
 controlPlane:
   replicaCount: 1
   image:
-    repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-control-plane
+    repository:  ghcr.io/langstream/langstream-control-plane
     pullPolicy: IfNotPresent
-    tag: "0.0.3"
+    tag: ""
 
   imagePullSecrets: []
   nameOverride: ""
@@ -25,7 +31,7 @@ controlPlane:
     port: 8090
   resources:
     requests:
-       cpu: 200m
+       cpu: 0.25
        memory: 256Mi
   liveness:
     initialDelaySeconds: 20
@@ -45,9 +51,9 @@ controlPlane:
 client:
   replicaCount: 1
   image:
-    repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-client
+    repository: ghcr.io/langstream/langstream-client
     pullPolicy: IfNotPresent
-    tag: "0.0.3"
+    tag: ""
 
   imagePullSecrets: []
   nameOverride: ""
@@ -58,15 +64,19 @@ client:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  resources: 
+    requests:
+      cpu: 0.25
+      memory: 256Mi
   app:
     config: {}
 
 deployer:
   replicaCount: 1
   image:
-    repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-deployer
+    repository: ghcr.io/langstream/langstream-deployer
     pullPolicy: IfNotPresent
-    tag: "0.0.3"
+    tag: ""
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
@@ -83,7 +93,7 @@ deployer:
   securityContext: {}
   resources:
     requests:
-      cpu: 200m
+      cpu: 0.25
       memory: 256Mi
   nodeSelector: {}
   tolerations: []
@@ -105,9 +115,9 @@ deployer:
 apiGateway:
   replicaCount: 1
   image:
-    repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-api-gateway
+    repository: ghcr.io/langstream/langstream-api-gateway
     pullPolicy: IfNotPresent
-    tag: "0.0.3"
+    tag: ""
 
   imagePullSecrets: []
   nameOverride: ""
@@ -129,7 +139,7 @@ apiGateway:
     port: 8091
   resources:
     requests:
-      cpu: 200m
+      cpu: 0.25
       memory: 256Mi
   nodeSelector: {}
   tolerations: []
@@ -138,8 +148,9 @@ apiGateway:
     config: {}
 
 runtime:
-  repository: public.ecr.aws/y3i6u2n7/datastax-public/langstream-runtime:0.0.3
+  image: ghcr.io/langstream/langstream-runtime
   imagePullPolicy: IfNotPresent
+  imageTag: ""
 
 tenants:
   defaultTenant:

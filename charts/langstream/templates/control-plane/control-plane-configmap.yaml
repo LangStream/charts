@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "langstream.controlPlaneLabels" . | nindent 4 }}
 data:
-  APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE: {{ .Values.runtime.image }}
+  APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE: "{{ include "langstream.runtimeImage" . }}"
   APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE_PULL_POLICY: {{ .Values.runtime.imagePullPolicy }}
   APPLICATION_STORAGE_APPS_CONFIGURATION_NAMESPACEPREFIX: {{ .Values.tenants.namespacePrefix }}
   APPLICATION_STORAGE_APPS_TYPE: {{ .Values.tenants.storageType }}

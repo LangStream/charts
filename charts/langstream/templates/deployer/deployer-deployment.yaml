@@ -29,7 +29,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.deployer.securityContext | nindent 12 }}
-          image: "{{ .Values.deployer.image.repository }}:{{ .Values.deployer.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.deployer.image.repository }}:{{ .Values.deployer.image.tag | default .Values.images.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.deployer.image.pullPolicy }}
           ports:
             - name: http
