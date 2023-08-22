@@ -286,7 +286,7 @@ Create the name of the role binding to use
 
 
 {{- define "langstream.runtimeImage" -}}
-  {{- $imageTag := default .Values.images.tag .Values.runtime.imageTag }}
+  {{- $imageTag := default .Values.images.tag (default .Values.runtime.imageTag .Chart.AppVersion) }}
   {{- if contains ":" .Values.runtime.image }}
     {{- .Values.runtime.image -}}
   {{- else }}

@@ -1,7 +1,7 @@
 
 # Global settings applied to all the images
 images:
-  tag: 0.0.4
+  tag: ""
 
 
 controlPlane:
