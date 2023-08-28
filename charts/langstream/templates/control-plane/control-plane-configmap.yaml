@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "langstream.controlPlaneLabels" . | nindent 4 }}
 data:
+  APPLICATION_STORAGE_APPS_CONFIGURATION_CONTROLPLANEURL: "http://{{ include "langstream.controlPlaneFullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.controlPlane.service.port }}"
   APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE: "{{ include "langstream.runtimeImage" . }}"
   APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE_PULL_POLICY: {{ .Values.runtime.imagePullPolicy }}
   APPLICATION_STORAGE_APPS_CONFIGURATION_NAMESPACEPREFIX: {{ .Values.tenants.namespacePrefix }}
