@@ -3,4 +3,4 @@ name: langstream
 description: Helm chart for LangStream
 type: application
 version: 0.0.6
-appVersion: 0.0.6
+appVersion: 0.0.8
