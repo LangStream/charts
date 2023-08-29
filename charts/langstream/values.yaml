@@ -109,6 +109,15 @@ deployer:
       podTemplate:
         tolerations: []
         nodeSelector: {}
+        annotations: []
+      agentPodTemplate:
+        tolerations: []
+        nodeSelector: {}
+        annotations: []
+      appDeployerPodTemplate:
+        tolerations: []
+        nodeSelector: {}
+        annotations: []
 
 
 
