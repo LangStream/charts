@@ -109,15 +109,15 @@ deployer:
       podTemplate:
         tolerations: []
         nodeSelector: {}
-        annotations: []
+        annotations: {}
       agentPodTemplate:
         tolerations: []
         nodeSelector: {}
-        annotations: []
+        annotations: {}
       appDeployerPodTemplate:
         tolerations: []
         nodeSelector: {}
-        annotations: []
+        annotations: {}
 
 
 
