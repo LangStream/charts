@@ -39,10 +39,16 @@ spec:
             httpGet:
               path: /management/health
               port: http
+            initialDelaySeconds: {{ .Values.apiGateway.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.apiGateway.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.apiGateway.liveness.timeoutSeconds }}
           readinessProbe:
             httpGet:
               path: /management/health
               port: http
+            initialDelaySeconds: {{ .Values.apiGateway.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.apiGateway.readiness.periodSeconds }}
+            timeoutSeconds: {{ .Values.apiGateway.readiness.timeoutSeconds }}
           resources:
             {{- toYaml .Values.apiGateway.resources | nindent 12 }}
           env:

@@ -39,10 +39,16 @@ spec:
             httpGet:
               path: /q/health/live
               port: http
+            initialDelaySeconds: {{ .Values.deployer.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployer.liveness.periodSeconds }}
+            timeoutSeconds: {{ .Values.deployer.liveness.timeoutSeconds }}
           readinessProbe:
             httpGet:
               path: /q/health/ready
               port: http
+            initialDelaySeconds: {{ .Values.deployer.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployer.readiness.periodSeconds }}
+            timeoutSeconds: {{ .Values.deployer.readiness.timeoutSeconds }}
           resources:
             {{- toYaml .Values.deployer.resources | nindent 12 }}
           env:
