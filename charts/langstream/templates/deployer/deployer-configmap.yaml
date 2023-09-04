@@ -23,6 +23,11 @@ data:
 {{- end }}
   DEPLOYER_RUNTIME_IMAGE: "{{ include "langstream.runtimeImage" . }}"
   DEPLOYER_RUNTIME_IMAGE_PULL_POLICY: {{ .Values.runtime.imagePullPolicy }}
+  DEPLOYER_GLOBAL_STORAGE: |
+    type: {{ .Values.globalStorage.type }}
+{{- range $key, $val := $.Values.globalStorage.configuration }}
+    {{ $key }}: {{ $val | toString | replace "\"" "" | trim | quote }}
+{{- end }}
 
 {{- range $key, $val := $.Values.deployer.app.config }}
 {{- if eq "codeStorage" $key }}

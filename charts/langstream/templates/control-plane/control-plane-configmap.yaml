@@ -6,6 +6,10 @@ metadata:
   labels:
     {{- include "langstream.controlPlaneLabels" . | nindent 4 }}
 data:
+  APPLICATION_STORAGE_GLOBAL_TYPE: {{ .Values.globalStorage.type }}
+{{- range $key, $val := $.Values.globalStorage.configuration }}
+  APPLICATION_STORAGE_GLOBAL_CONFIGURATION_{{ $key | replace "-" "" | replace "\"" "." | snakecase | upper | replace "." "_" }}: {{ $val | toString | replace "\"" "" | trim | quote }}
+{{- end }}
   APPLICATION_STORAGE_APPS_CONFIGURATION_CONTROLPLANEURL: "http://{{ include "langstream.controlPlaneFullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.controlPlane.service.port }}"
   APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE: "{{ include "langstream.runtimeImage" . }}"
   APPLICATION_STORAGE_APPS_CONFIGURATION_DEPLOYERRUNTIME_IMAGE_PULL_POLICY: {{ .Values.runtime.imagePullPolicy }}

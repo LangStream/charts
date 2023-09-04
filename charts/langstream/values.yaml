@@ -46,7 +46,7 @@ controlPlane:
   affinity: {}
   app:
     config:
-      application.storage.global.type: kubernetes
+      {}
 
 client:
   replicaCount: 1
@@ -184,6 +184,9 @@ tenants:
   storageType: kubernetes
   namespacePrefix: langstream-
 
+globalStorage:
+  type: kubernetes
+  configuration: {}
 
 codeStorage:
   type: none
