@@ -3,6 +3,16 @@ entries:
   langstream:
   - apiVersion: v2
     appVersion: 0.0.10
+    created: "2023-09-04T12:16:23.329641012Z"
+    description: Helm chart for LangStream
+    digest: b8daaed2efa3353a87a6ce053c585a27722e46423211f5c21d00a0c3445bbbed
+    name: langstream
+    type: application
+    urls:
+    - https://github.com/LangStream/charts/releases/download/langstream-0.0.11/langstream-0.0.11.tgz
+    version: 0.0.11
+  - apiVersion: v2
+    appVersion: 0.0.10
     created: "2023-09-04T11:02:43.56363656Z"
     description: Helm chart for LangStream
     digest: 12ae047897f8eca72abc9a6ab39bb4f6d0cfff4305c99439e290b93ba9fc30fd
@@ -108,4 +118,4 @@ entries:
     urls:
     - https://github.com/LangStream/charts/releases/download/langstream-0.0.1-alpha/langstream-0.0.1-alpha.tgz
     version: 0.0.1-alpha
-generated: "2023-09-04T11:02:43.563757661Z"
+generated: "2023-09-04T12:16:23.329680813Z"
