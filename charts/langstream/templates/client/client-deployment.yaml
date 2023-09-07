@@ -35,10 +35,10 @@ spec:
           command: [ "sh", "-c" ]
           args:
             - > 
-                echo "webServiceUrl: $WEB_SERVICE_URL" > /app/conf/cli.yaml &&
-                echo "apiGatewayUrl: $API_GATEWAY_URL" >> /app/conf/cli.yaml &&
-                echo "tenant: $TENANT" >> /app/conf/cli.yaml &&                
-                env &
+                /app/bin/langstream configure webServiceUrl $WEB_SERVICE_URL &&
+                /app/bin/langstream configure apiGatewayUrl $API_GATEWAY_URL &&
+                /app/bin/langstream configure tenant $TENANT && 
+                env &&
                 sleep infinity
           env:
             - name: KUBERNETES_NAMESPACE
