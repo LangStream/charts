@@ -1,0 +1,22 @@
+{{- if .Values.grafanaDashboards.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "grafana-dashboard-langstream"
+{{- if .Values.grafanaDashboards.namespaceOverride }}
+  namespace: {{ .Values.grafanaDashboards.namespaceOverride }}
+{{- else }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}
+  labels:
+    grafana_dashboard: "1"
+    helm.sh/chart: {{ include "langstream.chart" . }}
+{{- if .Chart.AppVersion }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+
+data:
+  apps.json: |-
+{{ .Files.Get "grafana-dashboards/apps.json" | indent 4 }}
+{{- end }}
