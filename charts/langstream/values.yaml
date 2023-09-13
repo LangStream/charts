@@ -191,3 +191,8 @@ globalStorage:
 codeStorage:
   type: none
   configuration: {}
+
+
+grafanaDashboards:
+  enabled: false
+  namespaceOverride: ""
