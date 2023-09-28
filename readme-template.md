@@ -1,12 +1,17 @@
-# LangStream Helm Charts Repository
+# LangStream Helm Charts Repositorya
 
 Charts:
 - [LangStream](./charts/langstream/)
 
 
-## LangStream values API reference
 
-<!--- insert-ref-here-->
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "helm-docs.versionFooter" . }}
 
 
 ## Import grafana dashboard
