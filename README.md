@@ -9,12 +9,9 @@ Charts:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| apiGateway | object | `{"affinity":{},"app":{"config":{}},"fullnameOverride":"","image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-api-gateway","tag":""},"imagePullSecrets":[],"liveness":{"initialDelaySeconds":10,"periodSeconds":30,"timeoutSeconds":5},"nameOverride":"","nodeSelector":{},"podAnnotations":{},"podSecurityContext":{},"readiness":{"initialDelaySeconds":5,"periodSeconds":5,"timeoutSeconds":5},"replicaCount":1,"resources":{"requests":{"cpu":0.25,"memory":"256Mi"}},"securityContext":{},"service":{"port":8091,"type":"ClusterIP"},"serviceAccount":{"annotations":{},"create":true,"name":"","role":{"name":"langstream-api-gateway"},"roleBinding":{"name":"langstream-api-gateway-role-binding"}},"tolerations":[]}` | API Gateway settings |
 | apiGateway.affinity | object | `{}` | Affinity settings |
-| apiGateway.app | object | `{"config":{}}` | Section related to the application |
 | apiGateway.app.config | object | `{}` | Application configuration. It must be in Spring application.properties format. e.g.: logging.level.ai.langstream.webservice: debug |
 | apiGateway.fullnameOverride | string | `""` | Fullname override for the component. By default it's used the chart name |
-| apiGateway.image | object | `{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-api-gateway","tag":""}` | Image settings |
 | apiGateway.image.pullPolicy | string | `"IfNotPresent"` | Pull policy for the image |
 | apiGateway.image.repository | string | `"ghcr.io/langstream/langstream-api-gateway"` | Repository for the image |
 | apiGateway.image.tag | string | `""` | Tag for the image. If set it overrides images.tag |
@@ -28,21 +25,17 @@ Charts:
 | apiGateway.replicaCount | int | `1` | Number of replicas |
 | apiGateway.resources | object | `{"requests":{"cpu":0.25,"memory":"256Mi"}}` | Resources for the pod |
 | apiGateway.securityContext | object | `{}` | Security context |
-| apiGateway.service | object | `{"port":8091,"type":"ClusterIP"}` | Pod resources settings |
 | apiGateway.service.port | int | `8091` | Port for the service. If changes, the control plane config must be updated accordingly |
 | apiGateway.service.type | string | `"ClusterIP"` | Type of service. Set "LoadBalancer" to enable external access |
-| apiGateway.serviceAccount | object | `{"annotations":{},"create":true,"name":"","role":{"name":"langstream-api-gateway"},"roleBinding":{"name":"langstream-api-gateway-role-binding"}}` | Service account settings |
 | apiGateway.serviceAccount.annotations | object | `{}` | Annotations for the service account |
 | apiGateway.serviceAccount.create | bool | `true` | Whether to create a service account or not |
 | apiGateway.serviceAccount.name | string | `""` | Name for the service account. If not set it's used the chart name. |
-| apiGateway.serviceAccount.role | object | `{"name":"langstream-api-gateway"}` | Role settings. This is a namespaced-role. |
-| apiGateway.serviceAccount.roleBinding | object | `{"name":"langstream-api-gateway-role-binding"}` | Role binding settings. This is a namespaced-role-binding. |
+| apiGateway.serviceAccount.role.name | string | `"langstream-api-gateway"` | Role name. This is a namespaced-role. |
+| apiGateway.serviceAccount.roleBinding.name | string | `"langstream-api-gateway-role-binding"` | Role binding name. This is a namespaced-role-binding. |
 | apiGateway.tolerations | list | `[]` | Toleration settings |
-| client | object | `{"affinity":{},"app":{"config":{}},"fullnameOverride":"","image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-cli","tag":""},"imagePullSecrets":[],"nameOverride":"","nodeSelector":{},"podAnnotations":{},"podSecurityContext":{},"replicaCount":1,"resources":{"requests":{"cpu":0.25,"memory":"256Mi"}},"securityContext":{},"tolerations":[]}` | Client pod settings |
 | client.affinity | object | `{}` | Affinity settings |
 | client.app | object | `{"config":{}}` | Section related to the application |
 | client.fullnameOverride | string | `""` | Fullname override for the component. By default it's used the chart name |
-| client.image | object | `{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-cli","tag":""}` | Image settings |
 | client.image.pullPolicy | string | `"IfNotPresent"` | Pull policy for the image |
 | client.image.repository | string | `"ghcr.io/langstream/langstream-cli"` | Repository for the image |
 | client.image.tag | string | `""` | Tag for the image. If set it overrides images.tag |
@@ -55,15 +48,12 @@ Charts:
 | client.resources | object | `{"requests":{"cpu":0.25,"memory":"256Mi"}}` | Resources for the pod |
 | client.securityContext | object | `{}` | Security context |
 | client.tolerations | list | `[]` | Toleration settings |
-| codeStorage | object | `{"configuration":{},"type":"none"}` | Code storage settings |
 | codeStorage.configuration | object | `{}` | Configuration for the storage type. |
 | codeStorage.type | string | `"none"` | Storage type implementation for code storage. "s3" or "azure-blob-storage" supported. |
-| controlPlane | object | `{"affinity":{},"app":{"config":{}},"fullnameOverride":"","image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-control-plane","tag":""},"imagePullSecrets":[],"liveness":{"initialDelaySeconds":20,"periodSeconds":30,"timeoutSeconds":5},"nameOverride":"","nodeSelector":{},"podAnnotations":{},"podSecurityContext":{},"readiness":{"initialDelaySeconds":10,"periodSeconds":5,"timeoutSeconds":5},"replicaCount":1,"resources":{"requests":{"cpu":0.25,"memory":"256Mi"}},"securityContext":{},"service":{"port":8090,"type":"ClusterIP"},"serviceAccount":{"annotations":{},"create":true,"name":"","role":{"name":"langstream-control-plane"},"roleBinding":{"name":"langstream-control-plane-role-binding"}},"tolerations":[]}` | Control plane settings |
 | controlPlane.affinity | object | `{}` | Affinity settings |
 | controlPlane.app | object | `{"config":{}}` | Section related to the application |
 | controlPlane.app.config | object | `{}` | Application configuration. It must be in Spring application.properties format. e.g.: logging.level.ai.langstream.webservice: debug |
 | controlPlane.fullnameOverride | string | `""` | Fullname override for the component. By default it's used the chart name |
-| controlPlane.image | object | `{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-control-plane","tag":""}` | Image settings |
 | controlPlane.image.pullPolicy | string | `"IfNotPresent"` | Pull policy for the image |
 | controlPlane.image.repository | string | `"ghcr.io/langstream/langstream-control-plane"` | Repository for the image |
 | controlPlane.image.tag | string | `""` | Tag for the image. If set it overrides images.tag |
@@ -76,36 +66,38 @@ Charts:
 | controlPlane.readiness | object | `{"initialDelaySeconds":10,"periodSeconds":5,"timeoutSeconds":5}` | Readiness probe settings |
 | controlPlane.replicaCount | int | `1` | Number of replicas |
 | controlPlane.resources | object | `{"requests":{"cpu":0.25,"memory":"256Mi"}}` | Resources for the pod |
+| controlPlane.securityContext | object | `{}` |  |
 | controlPlane.service.port | int | `8090` | Port for the service. If changes, the control plane config must be updated accordingly |
-| controlPlane.serviceAccount | object | `{"annotations":{},"create":true,"name":"","role":{"name":"langstream-control-plane"},"roleBinding":{"name":"langstream-control-plane-role-binding"}}` | Service account settings |
+| controlPlane.service.type | string | `"ClusterIP"` |  |
 | controlPlane.serviceAccount.annotations | object | `{}` | Annotations for the service account |
 | controlPlane.serviceAccount.create | bool | `true` | Whether to create a service account or not |
 | controlPlane.serviceAccount.name | string | `""` | Name for the service account. If not set it's used the chart name. |
-| controlPlane.serviceAccount.role | object | `{"name":"langstream-control-plane"}` | Role settings. This is a namespaced-role. |
-| controlPlane.serviceAccount.role.name | string | `"langstream-control-plane"` | Name for the role |
-| controlPlane.serviceAccount.roleBinding | object | `{"name":"langstream-control-plane-role-binding"}` | Role binding settings. This is a namespaced-role-binding. |
-| controlPlane.serviceAccount.roleBinding.name | string | `"langstream-control-plane-role-binding"` | Name for the role binding |
+| controlPlane.serviceAccount.role.name | string | `"langstream-control-plane"` | Name for the role. This is a namespaced-role. |
+| controlPlane.serviceAccount.roleBinding.name | string | `"langstream-control-plane-role-binding"` | Name for the role binding. This is a namespaced-role. |
 | controlPlane.tolerations | list | `[]` | Toleration settings |
-| deployer | object | `{"affinity":{},"app":{"config":{"agentPodTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]},"agentResources":{"cpuPerUnit":0.5,"defaultCpuMemUnits":1,"defaultInstanceUnits":1,"defaultMaxTotalResourceUnitsPerTenant":0,"enableLivenessProbe":true,"enableReadinessProbe":true,"instancePerUnit":1,"livenessProbeInitialDelaySeconds":10,"livenessProbePeriodSeconds":30,"livenessProbeTimeoutSeconds":5,"maxCpuMemUnits":8,"maxInstanceUnits":8,"memPerUnit":512,"readinessProbeInitialDelaySeconds":10,"readinessProbePeriodSeconds":30,"readinessProbeTimeoutSeconds":5},"appDeployerPodTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]},"clusterRuntime":{"kubernetes":{}},"codeStorage":{"endpoint":"","type":"none"},"podTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]}}},"fullnameOverride":"","image":{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-deployer","tag":""},"imagePullSecrets":[],"liveness":{"initialDelaySeconds":10,"periodSeconds":30,"timeoutSeconds":5},"nameOverride":"","nodeSelector":{},"podAnnotations":{},"podSecurityContext":{},"readiness":{"initialDelaySeconds":5,"periodSeconds":5,"timeoutSeconds":5},"replicaCount":1,"resources":{"requests":{"cpu":0.25,"memory":"256Mi"}},"securityContext":{},"serviceAccount":{"annotations":{},"create":true,"name":"","role":{"name":"langstream-deployer"},"roleBinding":{"name":"langstream-deployer-role-binding"}},"tolerations":[]}` | Deployer pod settings |
 | deployer.affinity | object | `{}` | Affinity settings |
-| deployer.app | object | `{"config":{"agentPodTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]},"agentResources":{"cpuPerUnit":0.5,"defaultCpuMemUnits":1,"defaultInstanceUnits":1,"defaultMaxTotalResourceUnitsPerTenant":0,"enableLivenessProbe":true,"enableReadinessProbe":true,"instancePerUnit":1,"livenessProbeInitialDelaySeconds":10,"livenessProbePeriodSeconds":30,"livenessProbeTimeoutSeconds":5,"maxCpuMemUnits":8,"maxInstanceUnits":8,"memPerUnit":512,"readinessProbeInitialDelaySeconds":10,"readinessProbePeriodSeconds":30,"readinessProbeTimeoutSeconds":5},"appDeployerPodTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]},"clusterRuntime":{"kubernetes":{}},"codeStorage":{"endpoint":"","type":"none"},"podTemplate":{"annotations":{},"nodeSelector":{},"tolerations":[]}}}` | Section related to the application |
 | deployer.app.config.agentPodTemplate | object | `{"annotations":{},"nodeSelector":{},"tolerations":[]}` | Pod template for the agents. It gets merged with podTemplate |
-| deployer.app.config.agentResources | object | `{"cpuPerUnit":0.5,"defaultCpuMemUnits":1,"defaultInstanceUnits":1,"defaultMaxTotalResourceUnitsPerTenant":0,"enableLivenessProbe":true,"enableReadinessProbe":true,"instancePerUnit":1,"livenessProbeInitialDelaySeconds":10,"livenessProbePeriodSeconds":30,"livenessProbeTimeoutSeconds":5,"maxCpuMemUnits":8,"maxInstanceUnits":8,"memPerUnit":512,"readinessProbeInitialDelaySeconds":10,"readinessProbePeriodSeconds":30,"readinessProbeTimeoutSeconds":5}` | configuration for runtime agent resources |
 | deployer.app.config.agentResources.cpuPerUnit | float | `0.5` | CPU allocated for a single unut |
 | deployer.app.config.agentResources.defaultCpuMemUnits | int | `1` | Default mem/cpu when not specified for a unit |
 | deployer.app.config.agentResources.defaultInstanceUnits | int | `1` | Default instance count when not specified for a unit |
 | deployer.app.config.agentResources.defaultMaxTotalResourceUnitsPerTenant | int | `0` | Max allocatable units for a single tenant |
+| deployer.app.config.agentResources.enableLivenessProbe | bool | `true` |  |
+| deployer.app.config.agentResources.enableReadinessProbe | bool | `true` |  |
 | deployer.app.config.agentResources.instancePerUnit | int | `1` | How many instance are created per single unit. An instance is a pod. |
+| deployer.app.config.agentResources.livenessProbeInitialDelaySeconds | int | `10` |  |
+| deployer.app.config.agentResources.livenessProbePeriodSeconds | int | `30` |  |
+| deployer.app.config.agentResources.livenessProbeTimeoutSeconds | int | `5` |  |
 | deployer.app.config.agentResources.maxCpuMemUnits | int | `8` | Max allocatable cpu/mem units for a single agent |
 | deployer.app.config.agentResources.maxInstanceUnits | int | `8` | Max allocatable instances for a single agent |
 | deployer.app.config.agentResources.memPerUnit | int | `512` | Memory allocated for a single unit |
+| deployer.app.config.agentResources.readinessProbeInitialDelaySeconds | int | `10` |  |
+| deployer.app.config.agentResources.readinessProbePeriodSeconds | int | `30` |  |
+| deployer.app.config.agentResources.readinessProbeTimeoutSeconds | int | `5` |  |
 | deployer.app.config.appDeployerPodTemplate | object | `{"annotations":{},"nodeSelector":{},"tolerations":[]}` | Pod template for the job that deploys the application. It gets merged with podTemplate |
-| deployer.app.config.clusterRuntime | object | `{"kubernetes":{}}` | Configuration for cluster runtimes |
 | deployer.app.config.clusterRuntime.kubernetes | object | `{}` | Configuration for the "kubernetes" cluster runtime |
 | deployer.app.config.codeStorage | object | `{"endpoint":"","type":"none"}` | DEPRECATED |
 | deployer.app.config.podTemplate | object | `{"annotations":{},"nodeSelector":{},"tolerations":[]}` | Pod template for the job that deploys the application and the agents |
 | deployer.fullnameOverride | string | `""` | Fullname override for the component. By default it's used the chart name |
-| deployer.image | object | `{"pullPolicy":"IfNotPresent","repository":"ghcr.io/langstream/langstream-deployer","tag":""}` | Image settings |
 | deployer.image.pullPolicy | string | `"IfNotPresent"` | Pull policy for the image |
 | deployer.image.repository | string | `"ghcr.io/langstream/langstream-deployer"` | Repository for the image |
 | deployer.image.tag | string | `""` | Tag for the image. If set it overrides images.tag |
@@ -119,27 +111,20 @@ Charts:
 | deployer.replicaCount | int | `1` | Number of replicas |
 | deployer.resources | object | `{"requests":{"cpu":0.25,"memory":"256Mi"}}` | Pod resources settings |
 | deployer.securityContext | object | `{}` | Security context |
-| deployer.serviceAccount | object | `{"annotations":{},"create":true,"name":"","role":{"name":"langstream-deployer"},"roleBinding":{"name":"langstream-deployer-role-binding"}}` | Service account settings |
 | deployer.serviceAccount.annotations | object | `{}` | Annotations for the service account |
 | deployer.serviceAccount.create | bool | `true` | Whether to create a service account or not |
 | deployer.serviceAccount.name | string | `""` | Name for the service account. If not set it's used the chart name. |
-| deployer.serviceAccount.role | object | `{"name":"langstream-deployer"}` | Role settings. This is a namespaced-role. |
-| deployer.serviceAccount.roleBinding | object | `{"name":"langstream-deployer-role-binding"}` | Role binding settings. This is a namespaced-role-binding. |
+| deployer.serviceAccount.role.name | string | `"langstream-deployer"` | Role name. This is a namespaced-role. |
+| deployer.serviceAccount.roleBinding.name | string | `"langstream-deployer-role-binding"` | Role binding name. This is a namespaced-role-binding. |
 | deployer.tolerations | list | `[]` | Toleration settings |
-| globalStorage | object | `{"configuration":{},"type":"kubernetes"}` | Storage settings |
 | globalStorage.configuration | object | `{}` | Configuration for the storage type. |
 | globalStorage.type | string | `"kubernetes"` | Storage type implementation for global storage. (tenants metadata) |
-| grafanaDashboards | object | `{"enabled":false,"namespaceOverride":""}` | Grafana dashboard settings |
 | grafanaDashboards.enabled | bool | `false` | Wheter to create the grafana dashboards or not. They're created as configmap and loaded by the grafana deployment (if present) |
 | grafanaDashboards.namespaceOverride | string | `""` | Namespace of the grafana deployment, if different from the LangStream's one |
-| images | object | `{"tag":""}` | Global settings applied to all the images |
-| images.tag | string | `""` | Tag for the images |
-| runtime | object | `{"image":"ghcr.io/langstream/langstream-runtime","imagePullPolicy":"IfNotPresent","imageTag":""}` | Runtime settings |
+| images.tag | string | `""` | Tag for all the images |
 | runtime.image | string | `"ghcr.io/langstream/langstream-runtime"` | Image to use for the runtime |
 | runtime.imagePullPolicy | string | `"IfNotPresent"` | Pull policy for the runtime image |
 | runtime.imageTag | string | `""` | Tag for the runtime image. If set it overrides images.tag. |
-| tenants | object | `{"defaultTenant":{"create":true,"name":"default"},"namespacePrefix":"langstream-","storageType":"kubernetes"}` | Tenants general settings |
-| tenants.defaultTenant | object | `{"create":true,"name":"default"}` | Default tenant settings |
 | tenants.defaultTenant.create | bool | `true` | Wheter to create the default tenant or not |
 | tenants.defaultTenant.name | string | `"default"` | Name for the default tenant |
 | tenants.namespacePrefix | string | `"langstream-"` | Tenant's namespace prefix. Each tenant will have a namespace with this prefix and the tenant name as suffix. e.g.: langstream-default |

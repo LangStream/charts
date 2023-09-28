@@ -1,14 +1,11 @@
 
-# -- Global settings applied to all the images
 images:
-  # -- Tag for the images
+  # -- Tag for all the images
   tag: ""
 
-# -- Control plane settings
 controlPlane:
   # -- Number of replicas
   replicaCount: 1
-  # -- Image settings
   image:
     # -- Repository for the image
     repository:  ghcr.io/langstream/langstream-control-plane
@@ -23,7 +20,6 @@ controlPlane:
   nameOverride: ""
   # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
-  # -- Service account settings
   serviceAccount:
     # -- Whether to create a service account or not
     create: true
@@ -31,13 +27,11 @@ controlPlane:
     annotations: {}
     # -- Name for the service account. If not set it's used the chart name.
     name: ""
-    # -- Role settings. This is a namespaced-role.
     role:
-      # -- Name for the role
+      # -- Name for the role. This is a namespaced-role.
       name: "langstream-control-plane"
-    # -- Role binding settings. This is a namespaced-role-binding.
     roleBinding:
-      # -- Name for the role binding
+      # -- Name for the role binding. This is a namespaced-role.
       name: "langstream-control-plane-role-binding"
 
   # -- Pod annotations
@@ -46,7 +40,6 @@ controlPlane:
   podSecurityContext: {}
   ## -- Security context
   securityContext: {}
-  ## -- Service settings
   service:
     ## -- Type of service. Set "LoadBalancer" to enable external access
     type: ClusterIP
@@ -80,11 +73,9 @@ controlPlane:
     config:
       {}
 
-# -- Client pod settings
 client:
   # -- Number of replicas
-  replicaCount: 1
-  # -- Image settings
+  replicaCount: 1  
   image:
     # -- Repository for the image
     repository: ghcr.io/langstream/langstream-cli
@@ -120,11 +111,9 @@ client:
   app:
     config: {}
 
-# -- Deployer pod settings
 deployer:
   # -- Number of replicas
   replicaCount: 1
-  # -- Image settings
   image:
     # -- Repository for the image
     repository: ghcr.io/langstream/langstream-deployer
@@ -138,7 +127,6 @@ deployer:
   nameOverride: ""
   # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
-  # -- Service account settings
   serviceAccount:
     # -- Whether to create a service account or not
     create: true
@@ -146,11 +134,11 @@ deployer:
     annotations: {}
     # -- Name for the service account. If not set it's used the chart name.
     name: ""
-    # -- Role settings. This is a namespaced-role.
     role:
+      # -- Role name. This is a namespaced-role.
       name: "langstream-deployer"
-    # -- Role binding settings. This is a namespaced-role-binding.
     roleBinding:
+      # -- Role binding name. This is a namespaced-role-binding.
       name: "langstream-deployer-role-binding"
   # -- Pod annotations
   podAnnotations: {}
@@ -179,10 +167,8 @@ deployer:
   tolerations: []
   # -- Affinity settings
   affinity: {}
-  # -- Section related to the application
   app:
     config:
-      # -- configuration for runtime agent resources
       agentResources:
         # -- CPU allocated for a single unut
         cpuPerUnit: 0.5
@@ -216,7 +202,6 @@ deployer:
         readinessProbePeriodSeconds: 30
         # -- Readiness probe timeout
         readinessProbeTimeoutSeconds: 5
-      # -- Configuration for cluster runtimes
       clusterRuntime:
         # -- Configuration for the "kubernetes" cluster runtime
         kubernetes: {}
@@ -241,11 +226,9 @@ deployer:
         annotations: {}
 
 
-# -- API Gateway settings
 apiGateway:
   # -- Number of replicas
   replicaCount: 1
-  # -- Image settings
   image:
     # -- Repository for the image
     repository: ghcr.io/langstream/langstream-api-gateway
@@ -260,7 +243,6 @@ apiGateway:
   nameOverride: ""
   # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
-  # -- Service account settings
   serviceAccount:
     # -- Whether to create a service account or not
     create: true
@@ -268,11 +250,12 @@ apiGateway:
     annotations: {}
     # -- Name for the service account. If not set it's used the chart name.
     name: ""
-    # -- Role settings. This is a namespaced-role.
     role:
+      # -- Role name. This is a namespaced-role.
       name: "langstream-api-gateway"
-    # -- Role binding settings. This is a namespaced-role-binding.
+    
     roleBinding:
+      # -- Role binding name. This is a namespaced-role-binding.
       name: "langstream-api-gateway-role-binding"
 
   # -- Pod annotations
@@ -281,7 +264,6 @@ apiGateway:
   podSecurityContext: {}
   # -- Security context
   securityContext: {}
-  # -- Pod resources settings
   service:
     # -- Type of service. Set "LoadBalancer" to enable external access
     type: ClusterIP
@@ -308,12 +290,10 @@ apiGateway:
     initialDelaySeconds: 5
     periodSeconds: 5
     timeoutSeconds: 5
-  # -- Section related to the application
   app:
     # -- Application configuration. It must be in Spring application.properties format. e.g.: logging.level.ai.langstream.webservice: debug
     config: {}
 
-# -- Runtime settings
 runtime:
   # -- Image to use for the runtime
   image: ghcr.io/langstream/langstream-runtime
@@ -322,9 +302,7 @@ runtime:
   # -- Tag for the runtime image. If set it overrides images.tag.
   imageTag: ""
 
-# -- Tenants general settings
 tenants:
-  # -- Default tenant settings
   defaultTenant:
     # -- Wheter to create the default tenant or not
     create: true
@@ -335,21 +313,19 @@ tenants:
   # -- Tenant's namespace prefix. Each tenant will have a namespace with this prefix and the tenant name as suffix. e.g.: langstream-default
   namespacePrefix: langstream-
 
-# -- Storage settings
 globalStorage:
   # -- Storage type implementation for global storage. (tenants metadata)
   type: kubernetes
   # -- Configuration for the storage type.
   configuration: {}
 
-# -- Code storage settings
+
 codeStorage:
   # -- Storage type implementation for code storage. "s3" or "azure-blob-storage" supported.
   type: none
   # -- Configuration for the storage type.
   configuration: {}
 
-# -- Grafana dashboard settings
 grafanaDashboards:
   # -- Wheter to create the grafana dashboards or not. They're created as configmap and loaded by the grafana deployment (if present)
   enabled: false
