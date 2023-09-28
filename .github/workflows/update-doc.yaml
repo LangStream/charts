@@ -1,0 +1,26 @@
+name: Update README
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  readme:
+    name: Readme
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate Readme
+        run: |
+          ./generate-readme.sh
+      - uses: stefanzweifel/git-auto-commit-action@v4
+      
+
+
+        

@@ -1,198 +1,357 @@
 
-# Global settings applied to all the images
+# -- Global settings applied to all the images
 images:
+  # -- Tag for the images
   tag: ""
 
-
+# -- Control plane settings
 controlPlane:
+  # -- Number of replicas
   replicaCount: 1
+  # -- Image settings
   image:
+    # -- Repository for the image
     repository:  ghcr.io/langstream/langstream-control-plane
+    # -- Pull policy for the image
     pullPolicy: IfNotPresent
+    # -- Tag for the image. If set it overrides images.tag
     tag: ""
 
+  # -- Image pull secrets
   imagePullSecrets: []
+  # -- Name override for the component. By default it's used the chart name
   nameOverride: ""
+  # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
+  # -- Service account settings
   serviceAccount:
+    # -- Whether to create a service account or not
     create: true
+    # -- Annotations for the service account
     annotations: {}
+    # -- Name for the service account. If not set it's used the chart name.
     name: ""
+    # -- Role settings. This is a namespaced-role.
     role:
+      # -- Name for the role
       name: "langstream-control-plane"
+    # -- Role binding settings. This is a namespaced-role-binding.
     roleBinding:
+      # -- Name for the role binding
       name: "langstream-control-plane-role-binding"
 
+  # -- Pod annotations
   podAnnotations: {}
+  # -- Pod security context
   podSecurityContext: {}
+  ## -- Security context
   securityContext: {}
+  ## -- Service settings
   service:
+    ## -- Type of service. Set "LoadBalancer" to enable external access
     type: ClusterIP
+    # -- Port for the service. If changes, the control plane config must be updated accordingly
     port: 8090
+  # -- Resources for the pod
   resources:
     requests:
        cpu: 0.25
        memory: 256Mi
+  # -- Liveness probe settings
   liveness:
     initialDelaySeconds: 20
     timeoutSeconds: 5
     periodSeconds: 30
+  # -- Readiness probe settings
   readiness:
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 5
+  # -- Node selector
   nodeSelector: {}
+  # -- Toleration settings
   tolerations: []
+  # -- Affinity settings
   affinity: {}
+  
+  # -- Section related to the application
   app:
+    # -- Application configuration. It must be in Spring application.properties format. e.g.: logging.level.ai.langstream.webservice: debug
     config:
       {}
 
+# -- Client pod settings
 client:
+  # -- Number of replicas
   replicaCount: 1
+  # -- Image settings
   image:
+    # -- Repository for the image
     repository: ghcr.io/langstream/langstream-cli
+    # -- Pull policy for the image
     pullPolicy: IfNotPresent
+    # -- Tag for the image. If set it overrides images.tag
     tag: ""
 
+  # -- Image pull secrets
   imagePullSecrets: []
+  # -- Name override for the component. By default it's used the chart name
   nameOverride: ""
+  # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
+  # -- Service account settings
   podAnnotations: {}
+  # -- Pod security context
   podSecurityContext: {}
+  # -- Security context
   securityContext: {}
+  # -- Node selector settings
   nodeSelector: {}
+  # -- Toleration settings
   tolerations: []
+  # -- Affinity settings
   affinity: {}
+  # -- Resources for the pod
   resources: 
     requests:
       cpu: 0.25
       memory: 256Mi
+  # -- Section related to the application
   app:
     config: {}
 
+# -- Deployer pod settings
 deployer:
+  # -- Number of replicas
   replicaCount: 1
+  # -- Image settings
   image:
+    # -- Repository for the image
     repository: ghcr.io/langstream/langstream-deployer
+    # -- Pull policy for the image
     pullPolicy: IfNotPresent
+    # -- Tag for the image. If set it overrides images.tag
     tag: ""
+  # -- Image pull secrets
   imagePullSecrets: []
+  # -- Name override for the component. By default it's used the chart name
   nameOverride: ""
+  # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
+  # -- Service account settings
   serviceAccount:
+    # -- Whether to create a service account or not
     create: true
+    # -- Annotations for the service account
     annotations: {}
+    # -- Name for the service account. If not set it's used the chart name.
     name: ""
+    # -- Role settings. This is a namespaced-role.
     role:
       name: "langstream-deployer"
+    # -- Role binding settings. This is a namespaced-role-binding.
     roleBinding:
       name: "langstream-deployer-role-binding"
+  # -- Pod annotations
   podAnnotations: {}
+  # -- Pod security context
   podSecurityContext: {}
+  # -- Security context
   securityContext: {}
+  # -- Pod resources settings
   resources:
     requests:
       cpu: 0.25
       memory: 256Mi
+  # -- Liveness probe settings
   liveness:
     initialDelaySeconds: 10
     timeoutSeconds: 5
     periodSeconds: 30
+  # -- Readiness probe settings
   readiness:
     initialDelaySeconds: 5
     periodSeconds: 5
     timeoutSeconds: 5
+  # -- Node selector settings
   nodeSelector: {}
+  # -- Toleration settings
   tolerations: []
+  # -- Affinity settings
   affinity: {}
+  # -- Section related to the application
   app:
     config:
-      agentResources: {}
+      # -- configuration for runtime agent resources
+      agentResources:
+        # -- CPU allocated for a single unut
+        cpuPerUnit: 0.5
+        # -- Memory allocated for a single unit
+        memPerUnit: 512
+        # -- How many instance are created per single unit. An instance is a pod.
+        instancePerUnit: 1
+        # -- Default mem/cpu when not specified for a unit
+        defaultCpuMemUnits: 1
+        # -- Default instance count when not specified for a unit
+        defaultInstanceUnits: 1
+        # -- Max allocatable cpu/mem units for a single agent
+        maxCpuMemUnits: 8
+        # -- Max allocatable instances for a single agent
+        maxInstanceUnits: 8
+        # -- Max allocatable units for a single tenant
+        defaultMaxTotalResourceUnitsPerTenant: 0
+        # -- Wheter to enable the liveness probe for the agent
+        enableLivenessProbe: true
+        # -- Liveness probe initial delay
+        livenessProbeInitialDelaySeconds: 10
+        # -- Liveness probe period
+        livenessProbePeriodSeconds: 30
+        # -- Liveness probe timeout
+        livenessProbeTimeoutSeconds: 5
+        # -- Wheter to enable the readiness probe for the agent
+        enableReadinessProbe: true
+        # -- Readiness probe initial delay
+        readinessProbeInitialDelaySeconds: 10
+        # -- Readiness probe period
+        readinessProbePeriodSeconds: 30
+        # -- Readiness probe timeout
+        readinessProbeTimeoutSeconds: 5
+      # -- Configuration for cluster runtimes
       clusterRuntime:
+        # -- Configuration for the "kubernetes" cluster runtime
         kubernetes: {}
+      # -- DEPRECATED
       codeStorage:
         type: none
         endpoint: ""
+      # -- Pod template for the job that deploys the application and the agents
       podTemplate:
         tolerations: []
         nodeSelector: {}
         annotations: {}
+      # -- Pod template for the agents. It gets merged with podTemplate
       agentPodTemplate:
         tolerations: []
         nodeSelector: {}
         annotations: {}
+      # -- Pod template for the job that deploys the application. It gets merged with podTemplate
       appDeployerPodTemplate:
         tolerations: []
         nodeSelector: {}
         annotations: {}
 
 
-
+# -- API Gateway settings
 apiGateway:
+  # -- Number of replicas
   replicaCount: 1
+  # -- Image settings
   image:
+    # -- Repository for the image
     repository: ghcr.io/langstream/langstream-api-gateway
+    # -- Pull policy for the image
     pullPolicy: IfNotPresent
+    # -- Tag for the image. If set it overrides images.tag
     tag: ""
 
+  # -- Image pull secrets
   imagePullSecrets: []
+  # -- Name override for the component. By default it's used the chart name
   nameOverride: ""
+  # -- Fullname override for the component. By default it's used the chart name
   fullnameOverride: ""
+  # -- Service account settings
   serviceAccount:
+    # -- Whether to create a service account or not
     create: true
+    # -- Annotations for the service account
     annotations: {}
+    # -- Name for the service account. If not set it's used the chart name.
     name: ""
+    # -- Role settings. This is a namespaced-role.
     role:
       name: "langstream-api-gateway"
+    # -- Role binding settings. This is a namespaced-role-binding.
     roleBinding:
       name: "langstream-api-gateway-role-binding"
 
+  # -- Pod annotations
   podAnnotations: {}
+  # -- Pod security context
   podSecurityContext: {}
+  # -- Security context
   securityContext: {}
+  # -- Pod resources settings
   service:
+    # -- Type of service. Set "LoadBalancer" to enable external access
     type: ClusterIP
+    # -- Port for the service. If changes, the control plane config must be updated accordingly
     port: 8091
+  # -- Resources for the pod
   resources:
     requests:
       cpu: 0.25
       memory: 256Mi
+  # -- Node selector settings
   nodeSelector: {}
+  # -- Toleration settings
   tolerations: []
+  # -- Affinity settings
   affinity: {}
+  # -- Liveness probe settings
   liveness:
     initialDelaySeconds: 10
     timeoutSeconds: 5
     periodSeconds: 30
+  # -- Readiness probe settings
   readiness:
     initialDelaySeconds: 5
     periodSeconds: 5
     timeoutSeconds: 5
+  # -- Section related to the application
   app:
+    # -- Application configuration. It must be in Spring application.properties format. e.g.: logging.level.ai.langstream.webservice: debug
     config: {}
 
+# -- Runtime settings
 runtime:
+  # -- Image to use for the runtime
   image: ghcr.io/langstream/langstream-runtime
+  # -- Pull policy for the runtime image
   imagePullPolicy: IfNotPresent
+  # -- Tag for the runtime image. If set it overrides images.tag.
   imageTag: ""
 
+# -- Tenants general settings
 tenants:
+  # -- Default tenant settings
   defaultTenant:
+    # -- Wheter to create the default tenant or not
     create: true
+    # -- Name for the default tenant
     name: default
+  # -- Storage type implementation for tenants.
   storageType: kubernetes
+  # -- Tenant's namespace prefix. Each tenant will have a namespace with this prefix and the tenant name as suffix. e.g.: langstream-default
   namespacePrefix: langstream-
 
+# -- Storage settings
 globalStorage:
+  # -- Storage type implementation for global storage. (tenants metadata)
   type: kubernetes
+  # -- Configuration for the storage type.
   configuration: {}
 
+# -- Code storage settings
 codeStorage:
+  # -- Storage type implementation for code storage. "s3" or "azure-blob-storage" supported.
   type: none
+  # -- Configuration for the storage type.
   configuration: {}
 
-
+# -- Grafana dashboard settings
 grafanaDashboards:
+  # -- Wheter to create the grafana dashboards or not. They're created as configmap and loaded by the grafana deployment (if present)
   enabled: false
+  # -- Namespace of the grafana deployment, if different from the LangStream's one
   namespaceOverride: ""
