@@ -16,10 +16,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Generate Readme
         run: |
           ./generate-readme.sh
+          cp README.md /tmp/README.md
       - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Generate Readme gh-pages
+        run: |
+          git checkout gh-pages
+          rm -rf README.md
+          cp /tmp/README.md README.md
+      - uses: stefanzweifel/git-auto-commit-action@v4
+
       
 
 

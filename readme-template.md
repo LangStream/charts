@@ -1,4 +1,4 @@
-# LangStream Helm Charts Repositorya
+# LangStream Helm Charts Repository
 
 Charts:
 - [LangStream](./charts/langstream/)
