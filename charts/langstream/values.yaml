@@ -202,6 +202,12 @@ deployer:
         readinessProbePeriodSeconds: 30
         # -- Readiness probe timeout
         readinessProbeTimeoutSeconds: 5
+        # -- Storage class mapping between the disk 'type' and the Kubernetes storage class
+        storageClassesMapping: {}
+        # -- Default storage class to use for the stateful agents
+        defaultStorageClass: default
+        # -- Default storage size to use for the stateful agents
+        defaultStorageDiskSize: 128MB
       clusterRuntime:
         # -- Configuration for the "kubernetes" cluster runtime
         kubernetes: {}
