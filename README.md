@@ -3,7 +3,7 @@
 Charts:
 - [LangStream](./charts/langstream/)
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.1](https://img.shields.io/badge/AppVersion-0.4.1-informational?style=flat-square)
 
 ## Values
 
@@ -81,6 +81,8 @@ Charts:
 | deployer.app.config.agentResources.defaultCpuMemUnits | int | `1` | Default mem/cpu when not specified for a unit |
 | deployer.app.config.agentResources.defaultInstanceUnits | int | `1` | Default instance count when not specified for a unit |
 | deployer.app.config.agentResources.defaultMaxTotalResourceUnitsPerTenant | int | `0` | Max allocatable units for a single tenant |
+| deployer.app.config.agentResources.defaultStorageClass | string | `"default"` | Default storage class to use for the stateful agents |
+| deployer.app.config.agentResources.defaultStorageDiskSize | string | `"128MB"` | Default storage size to use for the stateful agents |
 | deployer.app.config.agentResources.enableLivenessProbe | bool | `true` |  |
 | deployer.app.config.agentResources.enableReadinessProbe | bool | `true` |  |
 | deployer.app.config.agentResources.instancePerUnit | int | `1` | How many instance are created per single unit. An instance is a pod. |
@@ -93,6 +95,7 @@ Charts:
 | deployer.app.config.agentResources.readinessProbeInitialDelaySeconds | int | `10` |  |
 | deployer.app.config.agentResources.readinessProbePeriodSeconds | int | `30` |  |
 | deployer.app.config.agentResources.readinessProbeTimeoutSeconds | int | `5` |  |
+| deployer.app.config.agentResources.storageClassesMapping | object | `{}` | Storage class mapping between the disk 'type' and the Kubernetes storage class |
 | deployer.app.config.appDeployerPodTemplate | object | `{"annotations":{},"nodeSelector":{},"tolerations":[]}` | Pod template for the job that deploys the application. It gets merged with podTemplate |
 | deployer.app.config.clusterRuntime.kubernetes | object | `{}` | Configuration for the "kubernetes" cluster runtime |
 | deployer.app.config.codeStorage | object | `{"endpoint":"","type":"none"}` | DEPRECATED |
