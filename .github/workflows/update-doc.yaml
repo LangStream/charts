@@ -29,8 +29,15 @@ jobs:
           rm -rf README.md
           cp /tmp/README.md README.md
       - uses: stefanzweifel/git-auto-commit-action@v4
-
-      
-
-
-        
+        # Push README.md to the langstream/documentation repository
+      - name: Push to docs repo
+        env:
+            DOCS_REPO_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }} # Use the PAT stored in secrets
+        run: |
+          git clone https://github.com/langstream/documentation.git
+          cd documentation
+          rm -rf helm.md
+          cp /tmp/README.md helm.md
+          git add helm.md
+          git commit -m "Update helm documentation from charts repository"
+          git push https://${DOCS_REPO_TOKEN}@github.com/langstream/documentation.git HEAD:main
