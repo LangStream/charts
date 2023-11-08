@@ -38,6 +38,7 @@ jobs:
           cd documentation
           rm -rf helm.md
           cp /tmp/README.md helm.md
+          sed -i 's/# LangStream Helm Charts Repository/# LangStream Helm Chart Values/' helm.md
           git add helm.md
           git commit -m "Update helm documentation from charts repository"
           git push https://${DOCS_REPO_TOKEN}@github.com/langstream/documentation.git HEAD:main
