@@ -42,3 +42,4 @@ jobs:
           git add helm.md
           git commit -m "Update helm documentation from charts repository"
           git push https://${DOCS_REPO_TOKEN}@github.com/langstream/documentation.git HEAD:main
+      - uses: stefanzweifel/git-auto-commit-action@v4
